@@ -1,8 +1,6 @@
-const gameBoard = {
-  // moves = [x, o];
-};
-
-const gameController = {};
+var gameBoard = (function () {
+  var moves = ["x", "o"];
+})();
 
 const playerFactory = (name, role) => {
   const welcomePlayerX = () =>
@@ -15,3 +13,5 @@ const playerFactory = (name, role) => {
     );
   return { name, role, welcomePlayerX, welcomePlayerY };
 };
+
+const gameController = {};
