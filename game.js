@@ -1,9 +1,11 @@
+//game board
 var gameBoard = (function () {
   var moves = ["x", "o", "x", "o", "o"];
 
   return moves;
 })();
 
+//player creation
 const playerFactory = (name, role) => {
   const welcomePlayerX = () =>
     console.log(
@@ -16,6 +18,7 @@ const playerFactory = (name, role) => {
   return { name, role, welcomePlayerX, welcomePlayerY };
 };
 
+//game functionality
 const gameController = {};
 
 function displayMoves(move) {
