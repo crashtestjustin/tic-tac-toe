@@ -19,9 +19,11 @@ const playerFactory = (name, role) => {
 const gameController = {};
 
 function displayMoves(move) {
-  const moveList = document.querySelector(".moves-list");
   gameBoard.push(move);
-  moveList.textContent = gameBoard;
+  const squares = document.querySelectorAll(".board-square");
+  for (i = 0; i < gameBoard.length; i++) {
+    squares[i].innerHTML = gameBoard[i].toUpperCase();
+  }
 }
 
 displayMoves();
