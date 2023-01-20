@@ -1,5 +1,7 @@
 var gameBoard = (function () {
-  var moves = ["x", "o"];
+  var moves = ["x", "o", "x", "o", "o"];
+
+  return moves;
 })();
 
 const playerFactory = (name, role) => {
@@ -15,3 +17,11 @@ const playerFactory = (name, role) => {
 };
 
 const gameController = {};
+
+function displayMoves(move) {
+  const moveList = document.querySelector(".moves-list");
+  gameBoard.push(move);
+  moveList.textContent = gameBoard;
+}
+
+displayMoves();
