@@ -31,11 +31,12 @@ const playerFactory = (name, role) => {
 var gameController = (function () {
   var players = [];
   var joe = playerFactory("Joe", "X");
-  var jane = playerFactory("Joe", "Y");
+  var jane = playerFactory("Jane", "Y");
   players.push(joe);
   players.push(jane);
   console.log(players);
   joe.welcomePlayerX();
+  jane.welcomePlayerY();
   return {
     runPLayerMove: function () {
       gameBoard(role);
