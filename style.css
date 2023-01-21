@@ -3,6 +3,8 @@
   --mainbg-color: #f2f2f2;
   --header-and-footer-color: #ffffff;
   --border: 3px solid #444444c5;
+  --form-gap: 10px;
+  --controls-font-weight: 550;
 }
 
 body {
@@ -23,6 +25,76 @@ header {
   align-items: center;
 }
 
+.game-data {
+  align-self: center;
+  display: grid;
+  grid-template-rows: 4fr 2fr;
+  row-gap: 20px;
+  font-weight: var(--controls-font-weight);
+}
+
+.player-selection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.player-info,
+.game-type,
+.player-roles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.player-1-role,
+.player-2-role {
+  display: flex;
+  gap: var(--form-gap);
+}
+
+.player-1,
+.player-2 {
+  display: flex;
+  gap: var(--form-gap);
+}
+
+.player-1 input,
+.player-2 input {
+  border-radius: 4px;
+  border: 0;
+  font-size: 1rem;
+}
+
+.game-buttons {
+  justify-self: center;
+}
+
+.game-buttons button {
+  width: 180px;
+  height: 30px;
+  margin: 0 20px;
+  border-radius: 12px;
+  border: 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: var(--controls-font-weight);
+}
+
+.game-buttons button:active {
+  transform: scale(0.95);
+}
+
+.start {
+  background-color: lightblue;
+}
+
+.reset {
+  background-color: lightcoral;
+}
+
 .body-content {
   background-color: var(--mainbg-color);
   padding: var(--core-padding);
@@ -34,7 +106,8 @@ header {
 .board {
   padding: 100px;
   display: grid;
-  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  grid-template: repeat(3, 150px) / repeat(3, 150px);
+  justify-content: center;
 }
 
 .board-square {
