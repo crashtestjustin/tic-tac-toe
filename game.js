@@ -24,8 +24,24 @@ const playerFactory = (name, role) => {
   return { name, role, welcomePlayerX, welcomePlayerY };
 };
 
+// console.log(joe);
+// joe.welcomePlayerX();
+
 //game functionality
-const gameController = {};
+var gameController = (function () {
+  var players = [];
+  var joe = playerFactory("Joe", "X");
+  var jane = playerFactory("Joe", "Y");
+  players.push(joe);
+  players.push(jane);
+  console.log(players);
+  joe.welcomePlayerX();
+  return {
+    runPLayerMove: function () {
+      gameBoard(role);
+    },
+  };
+})();
 
 // function displayMoves(move) {
 //   gameBoard.push(move.toUpperCase());
