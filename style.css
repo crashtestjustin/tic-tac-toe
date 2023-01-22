@@ -33,7 +33,7 @@ header {
   font-weight: var(--controls-font-weight);
 }
 
-.player-selection {
+form {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 20px;
@@ -132,6 +132,10 @@ header {
 
 .board-square:nth-child(n + 7) {
   border-top: var(--border);
+}
+
+.disabled-label {
+  color: #787878;
 }
 
 footer {
