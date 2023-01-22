@@ -6,7 +6,7 @@ var gameBoard = (function (move) {
     if (squares.innerHTML !== "") {
       return;
     } else {
-      squares.innerHTML = move;
+      squares.innerHTML = "X";
     }
   });
 })();
@@ -23,9 +23,6 @@ const playerFactory = (name, role) => {
     );
   return { name, role, welcomePlayerX, welcomePlayerY };
 };
-
-// console.log(joe);
-// joe.welcomePlayerX();
 
 //game functionality
 var gameController = (function () {
@@ -44,11 +41,35 @@ var gameController = (function () {
   };
 })();
 
-// function displayMoves(move) {
-//   gameBoard.push(move.toUpperCase());
-//   const squares = document.querySelectorAll(".board-square");
-//   for (i = 0; i < gameBoard.length; i++) {
-//     squares[i].innerHTML = gameBoard[i];
-//   }
-//   console.log(gameBoard);
-// }
+//game controls setup
+var gameSetup = (function () {
+  const pvc = document.getElementById("pvc");
+  const pvp = document.getElementById("pvp");
+  const p2Name = document.getElementById("p2-name");
+  const p2Label = document.querySelector(".p2-name-label");
+  const p2RoleTitle = document.querySelector(".p2-choose-role");
+  const p2RoleX = document.getElementById("p2-role-x");
+  const p2RoleY = document.getElementById("p2-role-y");
+  const p2RoleLabel = document.querySelectorAll(".p2-role-label");
+  pvc.addEventListener("click", (e) => {
+    p2Name.disabled = true;
+    p2RoleX.disabled = true;
+    p2RoleY.disabled = true;
+    p2Label.classList.add("disabled-label");
+    p2RoleTitle.classList.add("disabled-label");
+    p2RoleLabel.forEach((label) => {
+      label.classList.add("disabled-label");
+    });
+  });
+
+  pvp.addEventListener("click", (e) => {
+    p2Name.disabled = false;
+    p2RoleX.disabled = false;
+    p2RoleY.disabled = false;
+    p2Label.classList.remove("disabled-label");
+    p2RoleTitle.classList.remove("disabled-label");
+    p2RoleLabel.forEach((label) => {
+      label.classList.remove("disabled-label");
+    });
+  });
+})();
