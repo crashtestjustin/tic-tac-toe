@@ -25,29 +25,7 @@ const playerFactory = (name, role) => {
 };
 
 //game functionality
-var gameController = (function () {
-  const startGameButton = document.querySelector(".start");
-  var players = [];
-  startGameButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log("test");
-    playerFactory(p1Name, p1RoleX);
-    playerFactory(p2Name, p2RoleY);
-  });
-  //   var joe = playerFactory("Joe", "X");
-  //   var jane = playerFactory("Jane", "Y");
-  //   players.push(joe);
-  //   players.push(jane);
-  //   console.log(players);
-  //   joe.welcomePlayerX();
-  //   jane.welcomePlayerY();
-
-  //   return {
-  //     runPLayerMove: function () {
-  //       gameBoard(role);
-  //     },
-  //   };
-})();
+var gameController = (function () {})();
 
 //game controls setup
 var gameSetup = (function () {
@@ -85,3 +63,33 @@ var gameSetup = (function () {
     });
   });
 })();
+
+//previous code - don't come back to this unless absolutely necessary
+// const startGameButton = document.querySelector(".start");
+// const p1Name = document.getElementById("p1-name");
+// const p2Name = document.getElementById("p2-name");
+// const p1RoleX = document.getElementById("p1-role-x");
+// const p2RoleX = document.getElementById("p2-role-x");
+// const p1RoleY = document.getElementById("p1-role-y");
+// const p2RoleY = document.getElementById("p2-role-y");
+// startGameButton.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   console.log("test");
+//   var playerOne = playerFactory(p1Name.value, p1RoleX.value);
+//   var playerTwo = playerFactory(p2Name.value, p2RoleY.value);
+//   playerOne.welcomePlayerX();
+//   playerTwo.welcomePlayerY();
+// });
+//   var joe = playerFactory("Joe", "X");
+//   var jane = playerFactory("Jane", "Y");
+//   players.push(joe);
+//   players.push(jane);
+//   console.log(players);
+//   joe.welcomePlayerX();
+//   jane.welcomePlayerY();
+
+//   return {
+//     runPLayerMove: function () {
+//       gameBoard(role);
+//     },
+//   };
