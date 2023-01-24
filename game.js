@@ -14,7 +14,7 @@ var gameBoard = (function () {
 var gameController = (function () {
   var p1Role;
   var p2Role;
-  let xTurn = true;
+  var xTurn = true;
   const startGameB = document.querySelector(".start");
   startGameB.addEventListener("click", (e) => {
     e.preventDefault();
@@ -71,7 +71,7 @@ function personFactory(name, role) {
   };
 }
 
-//game controls setup
+//initial game controls setup
 var gameSetup = (function () {
   const pvc = document.getElementById("pvc");
   const pvp = document.getElementById("pvp");
@@ -79,7 +79,7 @@ var gameSetup = (function () {
   const p2Label = document.querySelector(".p2-name-label");
   const p2RoleTitle = document.querySelector(".p2-choose-role");
   const p2RoleX = document.getElementById("p2-role-x");
-  const p2RoleY = document.getElementById("p2-role-y");
+  const p2RoleY = document.getElementById("p2-role-o");
   const p2RoleLabel = document.querySelectorAll(".p2-role-label");
   pvc.addEventListener("click", (e) => {
     p2Name.disabled = true;
