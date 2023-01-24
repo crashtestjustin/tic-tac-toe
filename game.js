@@ -1,16 +1,55 @@
 //game board
-var gameBoard = (function (move) {
-  const boardSq = document.querySelectorAll(".board-square");
-  boardSq.forEach((sq) => {
-    sq.addEventListener("click", (e) => {
-      const squares = e.target.closest(".board-square");
-      if (squares.innerHTML !== "") {
-        return;
-      } else {
-        squares.innerHTML = "X";
-      }
+var gameBoard = (function () {
+  const board = [];
+
+  const gameReset = (function gameReset() {
+    const resetButton = document.querySelector(".reset");
+    resetButton.addEventListener("click", (e) => {
+      //   board = [];
     });
+  })();
+})();
+
+//game functionality
+var gameController = (function () {
+  var p1Role;
+  var p2Role;
+  let xTurn = true;
+  const startGameB = document.querySelector(".start");
+  startGameB.addEventListener("click", (e) => {
+    e.preventDefault();
+    determineRoles();
   });
+
+  const determineRoles = () => {
+    const PlayerRole = document.querySelectorAll(".role-selection");
+    for (i = 0; i < PlayerRole.length; i++) {
+      if (PlayerRole[i].checked) {
+        if (
+          PlayerRole[i].id === "p1-role-x" ||
+          PlayerRole[i].id === "p1-role-o"
+        ) {
+          p1Role = PlayerRole[i].value;
+        } else {
+          p2Role = PlayerRole[i].value;
+        }
+      }
+    }
+  };
+
+  const markBoard = () => {
+    const boardSq = document.querySelectorAll(".board-square");
+    boardSq.forEach((sq) => {
+      sq.addEventListener("click", (e) => {
+        const squares = e.target.closest(".board-square");
+        if (squares.innerHTML !== "") {
+          return;
+        } else {
+          squares.innerHTML = "X";
+        }
+      });
+    });
+  };
 })();
 
 //player creation
@@ -31,35 +70,6 @@ function personFactory(name, role) {
     },
   };
 }
-
-//game functionality
-var gameController = (function () {
-  const startGameButton = document.querySelector(".start");
-  const p1Name = document.getElementById("p1-name");
-  const p2Name = document.getElementById("p2-name");
-  const p1RoleX = document.getElementById("p1-role-x").value;
-  const p2RoleX = document.getElementById("p2-role-x").value;
-  const p1RoleY = document.getElementById("p1-role-y").value;
-  const p2RoleY = document.getElementById("p2-role-y").value;
-  var playerX;
-  var playerO;
-  startGameButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (p1RoleX.checked) {
-      playerX = personFactory(p1Name.value, p1RoleX);
-      playerO = personFactory(p2Name.value, p2RoleY);
-      console.log(playerX, playerO);
-      playerX.welcomeMessage();
-      playerO.welcomeMessage();
-    } else {
-      playerO = personFactory(p1Name.value, p1RoleY);
-      playerX = personFactory(p2Name.value, p2RoleX);
-      console.log(playerX, playerO);
-      playerX.welcomeMessage();
-      playerO.welcomeMessage();
-    }
-  });
-})();
 
 //game controls setup
 var gameSetup = (function () {
