@@ -14,11 +14,19 @@ var gameBoard = (function () {
 var gameController = (function () {
   var p1Role;
   var p2Role;
+  var player1;
+  var player2;
   var xTurn = true;
   const startGameB = document.querySelector(".start");
+  const p1Name = document.getElementById("p1-name");
+  const p2Name = document.getElementById("p2-name");
   startGameB.addEventListener("click", (e) => {
     e.preventDefault();
     determineRoles();
+    player1 = personFactory(p1Name.value, p1Role);
+    player2 = personFactory(p2Name.value, p2Role);
+    console.log(player1);
+    console.log(player2);
   });
 
   const determineRoles = () => {
@@ -37,7 +45,7 @@ var gameController = (function () {
     }
   };
 
-  const markBoard = () => {
+  const markBoard = (() => {
     const boardSq = document.querySelectorAll(".board-square");
     boardSq.forEach((sq) => {
       sq.addEventListener("click", (e) => {
@@ -45,11 +53,18 @@ var gameController = (function () {
         if (squares.innerHTML !== "") {
           return;
         } else {
-          squares.innerHTML = "X";
+          if (xTurn) {
+            squares.innerHTML = "X";
+          } else {
+            squares.innerHTML = "O";
+          }
         }
+        xTurn = !xTurn;
+        console.log(xTurn);
       });
     });
-  };
+  })();
+  //
 })();
 
 //player creation
