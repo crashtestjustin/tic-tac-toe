@@ -28,7 +28,7 @@ header {
 .game-data {
   align-self: center;
   display: grid;
-  grid-template-rows: 4fr 2fr;
+  grid-template-rows: 4fr 2fr 2fr;
   row-gap: 20px;
   font-weight: var(--controls-font-weight);
 }
@@ -70,6 +70,16 @@ form {
 
 .game-buttons {
   justify-self: center;
+  grid-row: 2 / 3;
+}
+
+.alert-messages {
+  justify-self: center;
+  grid-row: 3 / 4;
+}
+
+.alert-messages::after {
+  /* content: "Hello"; */
 }
 
 .game-buttons button {
