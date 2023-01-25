@@ -1,6 +1,11 @@
 //game board
 var gameBoard = (function () {
-  const board = [];
+  const board = new Array(9);
+
+  const setArrayIndex = (index, role) => {
+    if (index > board.length) return;
+    board[index] = role;
+  };
 
   const gameReset = (function gameReset() {
     const resetButton = document.querySelector(".reset");
@@ -8,6 +13,7 @@ var gameBoard = (function () {
       //   board = [];
     });
   })();
+  return { board, setArrayIndex };
 })();
 
 //game functionality
@@ -28,12 +34,11 @@ var gameController = (function () {
     player2 = personFactory(p2Name.value, p2Role);
     if (player1.role === "X") {
       setActivePlayer(player1.name);
-      activePlayer = player1.name;
+      activePlayer = personFactory(player1.name, "X");
     } else {
       setActivePlayer(player2.name);
-      activePlayer = player2.name;
+      activePlayer = personFactory(player2.name, "X");
     }
-    console.log(activePlayer);
   });
 
   const determineRoles = () => {
@@ -60,31 +65,27 @@ var gameController = (function () {
         if (squares.innerHTML !== "") {
           return;
         } else {
-          if (xTurn) {
-            squares.innerHTML = "X";
-          } else {
-            squares.innerHTML = "O";
-          }
+          xTurn ? (squares.innerHTML = "X") : (squares.innerHTML = "O");
         }
+        gameBoard.setArrayIndex(squares.dataset.square, activePlayer.role);
         xTurn = !xTurn;
         updateActivePlayer();
-        setActivePlayer(activePlayer);
+        setActivePlayer(activePlayer.name);
       });
     });
   })();
 
   function updateActivePlayer() {
-    if (activePlayer === player1.name) {
-      activePlayer = player2.name;
-    } else {
-      activePlayer = player1.name;
-    }
+    activePlayer.name === player1.name
+      ? (activePlayer = player2)
+      : (activePlayer = player1);
   }
 
   function setActivePlayer(name) {
     const alertMessage = document.querySelector(".alert-messages");
     alertMessage.innerHTML = `${name}'s turn`;
   }
+
   //
 })();
 
