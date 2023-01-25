@@ -16,6 +16,7 @@ var gameController = (function () {
   var p2Role;
   var player1;
   var player2;
+  var activePlayer;
   var xTurn = true;
   const startGameB = document.querySelector(".start");
   const p1Name = document.getElementById("p1-name");
@@ -25,8 +26,14 @@ var gameController = (function () {
     determineRoles();
     player1 = personFactory(p1Name.value, p1Role);
     player2 = personFactory(p2Name.value, p2Role);
-    console.log(player1);
-    console.log(player2);
+    if (player1.role === "X") {
+      setActivePlayer(player1.name);
+      activePlayer = player1.name;
+    } else {
+      setActivePlayer(player2.name);
+      activePlayer = player2.name;
+    }
+    console.log(activePlayer);
   });
 
   const determineRoles = () => {
@@ -60,10 +67,24 @@ var gameController = (function () {
           }
         }
         xTurn = !xTurn;
-        console.log(xTurn);
+        updateActivePlayer();
+        setActivePlayer(activePlayer);
       });
     });
   })();
+
+  function updateActivePlayer() {
+    if (activePlayer === player1.name) {
+      activePlayer = player2.name;
+    } else {
+      activePlayer = player1.name;
+    }
+  }
+
+  function setActivePlayer(name) {
+    const alertMessage = document.querySelector(".alert-messages");
+    alertMessage.innerHTML = `${name}'s turn`;
+  }
   //
 })();
 
