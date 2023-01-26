@@ -7,13 +7,26 @@ var gameBoard = (function () {
     board[index] = role;
   };
 
+  const winningArrays = (() => {
+    const combos = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+  })();
+
   const gameReset = (function gameReset() {
     const resetButton = document.querySelector(".reset");
     resetButton.addEventListener("click", (e) => {
       //   board = [];
     });
   })();
-  return { board, setArrayIndex };
+  return { board, setArrayIndex, winningArrays };
 })();
 
 //game functionality
@@ -68,6 +81,7 @@ var gameController = (function () {
           xTurn ? (squares.innerHTML = "X") : (squares.innerHTML = "O");
         }
         gameBoard.setArrayIndex(squares.dataset.square, activePlayer.role);
+        checkForWinner();
         xTurn = !xTurn;
         updateActivePlayer();
         setActivePlayer(activePlayer.name);
@@ -84,6 +98,11 @@ var gameController = (function () {
   function setActivePlayer(name) {
     const alertMessage = document.querySelector(".alert-messages");
     alertMessage.innerHTML = `${name}'s turn`;
+  }
+
+  function checkForWinner() {
+    console.log(gameBoard.board);
+    console.log(gameBoard.board.length);
   }
 
   //
