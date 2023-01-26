@@ -81,7 +81,7 @@ var gameController = (function () {
           xTurn ? (squares.innerHTML = "X") : (squares.innerHTML = "O");
         }
         gameBoard.setArrayIndex(squares.dataset.square, activePlayer.role);
-        checkForWinner();
+        // checkForWinner();
         xTurn = !xTurn;
         updateActivePlayer();
         setActivePlayer(activePlayer.name);
@@ -101,8 +101,10 @@ var gameController = (function () {
   }
 
   function checkForWinner() {
-    console.log(gameBoard.board);
-    console.log(gameBoard.board.length);
+    //compare gameBoard.board with winning combos
+    //look for matched sequences within the board of a single role to one of the combos of winning moves
+    //if none return
+    //if match - run announce game winner (To Be Created)
   }
 
   //
