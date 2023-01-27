@@ -39,6 +39,7 @@ var gameController = (function () {
   var player2;
   var activePlayer;
   var xTurn = true;
+  var winner = false;
   const startGameB = document.querySelector(".start");
   const p1Name = document.getElementById("p1-name");
   const p2Name = document.getElementById("p2-name");
@@ -84,9 +85,13 @@ var gameController = (function () {
         }
         gameBoard.setArrayIndex(squares.dataset.square, activePlayer.role);
         checkForWinner(squares.dataset.square);
-        xTurn = !xTurn;
-        updateActivePlayer();
-        setActivePlayer(activePlayer.name);
+        if (winner) {
+          return;
+        } else {
+          xTurn = !xTurn;
+          updateActivePlayer();
+          setActivePlayer(activePlayer.name);
+        }
       });
     });
   })();
@@ -108,9 +113,18 @@ var gameController = (function () {
         return gameBoard.getMove(moveIndex) === gameBoard.getMove(arrayIndex);
       });
     });
-    matchedArrays.length >= 1 ? true : false;
+    if (matchedArrays.length >= 1) {
+      winnerAnnouncement();
+      winner = true;
+    } else {
+      return;
+    }
   }
 
+  function winnerAnnouncement() {
+    const alertMessage = document.querySelector(".alert-messages");
+    alertMessage.innerHTML = `${activePlayer.name} WINS!`;
+  }
   //compare gameBoard.board with winning combos
   //look for matched sequences within the board of a single role to one of the combos of winning moves
   //if none return
