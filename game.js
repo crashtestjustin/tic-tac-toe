@@ -125,10 +125,6 @@ var gameController = (function () {
     const alertMessage = document.querySelector(".alert-messages");
     alertMessage.innerHTML = `${activePlayer.name} WINS!`;
   }
-  //compare gameBoard.board with winning combos
-  //look for matched sequences within the board of a single role to one of the combos of winning moves
-  //if none return
-  //if match - run announce game winner (To Be Created)
 
   //
 })();
