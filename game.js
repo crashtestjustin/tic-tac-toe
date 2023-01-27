@@ -108,7 +108,7 @@ var gameController = (function () {
   }
 
   function checkForWinner(moveIndex) {
-    let matchedArrays = gameBoard.winningArrays.filter(function (innerArray) {
+    var matchedArrays = gameBoard.winningArrays.filter(function (innerArray) {
       return innerArray.every(function (arrayIndex) {
         return gameBoard.getMove(moveIndex) === gameBoard.getMove(arrayIndex);
       });
