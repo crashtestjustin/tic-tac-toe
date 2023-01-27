@@ -7,18 +7,20 @@ var gameBoard = (function () {
     board[index] = role;
   };
 
-  const winningArrays = (() => {
-    const combos = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-  })();
+  const getMove = (index) => {
+    return board[index];
+  };
+
+  const winningArrays = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
 
   const gameReset = (function gameReset() {
     const resetButton = document.querySelector(".reset");
@@ -26,7 +28,7 @@ var gameBoard = (function () {
       //   board = [];
     });
   })();
-  return { board, setArrayIndex, winningArrays };
+  return { board, setArrayIndex, getMove, winningArrays };
 })();
 
 //game functionality
@@ -81,7 +83,7 @@ var gameController = (function () {
           xTurn ? (squares.innerHTML = "X") : (squares.innerHTML = "O");
         }
         gameBoard.setArrayIndex(squares.dataset.square, activePlayer.role);
-        // checkForWinner();
+        checkForWinner(squares.dataset.square);
         xTurn = !xTurn;
         updateActivePlayer();
         setActivePlayer(activePlayer.name);
@@ -100,12 +102,19 @@ var gameController = (function () {
     alertMessage.innerHTML = `${name}'s turn`;
   }
 
-  function checkForWinner() {
-    //compare gameBoard.board with winning combos
-    //look for matched sequences within the board of a single role to one of the combos of winning moves
-    //if none return
-    //if match - run announce game winner (To Be Created)
+  function checkForWinner(moveIndex) {
+    let matchedArrays = gameBoard.winningArrays.filter(function (innerArray) {
+      return innerArray.every(function (arrayIndex) {
+        return gameBoard.getMove(moveIndex) === gameBoard.getMove(arrayIndex);
+      });
+    });
+    matchedArrays.length >= 1 ? true : false;
   }
+
+  //compare gameBoard.board with winning combos
+  //look for matched sequences within the board of a single role to one of the combos of winning moves
+  //if none return
+  //if match - run announce game winner (To Be Created)
 
   //
 })();
