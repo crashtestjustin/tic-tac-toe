@@ -49,10 +49,10 @@ var gameController = (function () {
     player1 = personFactory(p1Name.value, p1Role);
     player2 = personFactory(p2Name.value, p2Role);
     if (player1.role === "X") {
-      setActivePlayer(player1.name);
+      announceActivePlayer(player1.name);
       activePlayer = personFactory(player1.name, "X");
     } else {
-      setActivePlayer(player2.name);
+      announceActivePlayer(player2.name);
       activePlayer = personFactory(player2.name, "X");
     }
   });
@@ -90,8 +90,9 @@ var gameController = (function () {
         } else {
           xTurn = !xTurn;
           updateActivePlayer();
-          setActivePlayer(activePlayer.name);
+          announceActivePlayer(activePlayer.name);
         }
+        // console.log(gameBoard.board);
       });
     });
   })();
@@ -102,7 +103,7 @@ var gameController = (function () {
       : (activePlayer = player1);
   }
 
-  function setActivePlayer(name) {
+  function announceActivePlayer(name) {
     const alertMessage = document.querySelector(".alert-messages");
     alertMessage.innerHTML = `${name}'s turn`;
   }
