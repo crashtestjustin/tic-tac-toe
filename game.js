@@ -22,12 +22,6 @@ var gameBoard = (function () {
     [2, 4, 6],
   ];
 
-  const gameReset = (function gameReset() {
-    const resetButton = document.querySelector(".reset");
-    resetButton.addEventListener("click", (e) => {
-      //   board = [];
-    });
-  })();
   return { board, setArrayIndex, getMove, winningArrays };
 })();
 
@@ -40,21 +34,23 @@ var gameController = (function () {
   var activePlayer;
   var xTurn = true;
   var winner = false;
-  const startGameB = document.querySelector(".start");
-  const p1Name = document.getElementById("p1-name");
-  const p2Name = document.getElementById("p2-name");
-  startGameB.addEventListener("click", (e) => {
+  var turn = 0;
+
+  const domElements = (() => {
+    const startGameB = document.querySelector(".start");
+    const p1Name = document.getElementById("p1-name");
+    const p2Name = document.getElementById("p2-name");
+    const boardSq = document.querySelectorAll(".board-square");
+    const PlayerRole = document.querySelectorAll(".role-selection");
+    return { startGameB, p1Name, p2Name, boardSq, PlayerRole };
+  })();
+
+  domElements.startGameB.addEventListener("click", (e) => {
     e.preventDefault();
     determineRoles();
-    player1 = personFactory(p1Name.value, p1Role);
-    player2 = personFactory(p2Name.value, p2Role);
-    if (player1.role === "X") {
-      announceActivePlayer(player1.name);
-      activePlayer = personFactory(player1.name, "X");
-    } else {
-      announceActivePlayer(player2.name);
-      activePlayer = personFactory(player2.name, "X");
-    }
+    player1 = personFactory(domElements.p1Name.value, p1Role);
+    player2 = personFactory(domElements.p2Name.value, p2Role);
+    confirmActive();
   });
 
   const determineRoles = () => {
@@ -74,25 +70,27 @@ var gameController = (function () {
   };
 
   const markBoard = (() => {
-    const boardSq = document.querySelectorAll(".board-square");
-    boardSq.forEach((sq) => {
+    domElements.boardSq.forEach((sq) => {
       sq.addEventListener("click", (e) => {
         const squares = e.target.closest(".board-square");
         if (squares.innerHTML !== "") {
           return;
         } else {
           xTurn ? (squares.innerHTML = "X") : (squares.innerHTML = "O");
+          turn++;
         }
         gameBoard.setArrayIndex(squares.dataset.square, activePlayer.role);
         checkForWinner(squares.dataset.square);
         if (winner) {
           return;
+        } else if (turn === 9) {
+          winnerAnnouncement();
         } else {
           xTurn = !xTurn;
           updateActivePlayer();
           announceActivePlayer(activePlayer.name);
         }
-        // console.log(gameBoard.board);
+        console.log(gameBoard.board);
       });
     });
   })();
@@ -115,8 +113,8 @@ var gameController = (function () {
       });
     });
     if (matchedArrays.length >= 1) {
-      winnerAnnouncement();
       winner = true;
+      winnerAnnouncement();
     } else {
       return;
     }
@@ -124,9 +122,40 @@ var gameController = (function () {
 
   function winnerAnnouncement() {
     const alertMessage = document.querySelector(".alert-messages");
-    alertMessage.innerHTML = `${activePlayer.name} WINS!`;
+    if (winner) {
+      alertMessage.innerHTML = `${activePlayer.name} WINS!`;
+    } else {
+      alertMessage.innerHTML = `DRAW GAME. Neither ${player1.name} or ${player2.name} wins.`;
+    }
   }
 
+  const gameReset = (function gameReset() {
+    const resetButton = document.querySelector(".reset");
+    resetButton.addEventListener("click", (e) => {
+      for (i = 0; i < gameBoard.board.length; i++) {
+        gameBoard.board[i] = "";
+        domElements.boardSq.forEach((sq) => {
+          sq.innerHTML = null;
+          turn = 0;
+          xTurn = true;
+        });
+      }
+      let roleSelectors = document.querySelectorAll(".role-selection");
+      for (i = 0; i < roleSelectors.length; i++) {
+        roleSelectors[i].checked = false;
+      }
+    });
+  })();
+
+  function confirmActive() {
+    if (player1.role === "X") {
+      announceActivePlayer(player1.name);
+      activePlayer = personFactory(player1.name, "X");
+    } else {
+      announceActivePlayer(player2.name);
+      activePlayer = personFactory(player2.name, "X");
+    }
+  }
   //
 })();
 
