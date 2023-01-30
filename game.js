@@ -141,9 +141,15 @@ var gameController = (function () {
         return gameBoard.getMove(moveIndex) === gameBoard.getMove(arrayIndex);
       });
     });
+    console.log(matchedArrays);
     if (matchedArrays.length >= 1) {
       winner = true;
       winnerAnnouncement();
+      flatArray = matchedArrays.flat();
+      for (i = 0; i < flatArray.length; i++) {
+        domElements.boardSq[flatArray[i]].className =
+          "board-square winning-move";
+      }
     } else {
       return;
     }
@@ -177,8 +183,11 @@ var gameController = (function () {
       domElements.alertMessage.innerHTML = "";
       domElements.roleLabel.forEach((label) => {
         label.classList.remove("error-text-color");
-        validGame = false;
       });
+      domElements.boardSq.forEach((sq) => {
+        sq.className = "board-square";
+      });
+      validGame = false;
     });
   })();
 
