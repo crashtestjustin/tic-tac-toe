@@ -79,6 +79,9 @@ var gameController = (function () {
       player1 = personFactory(domElements.p1Name.value, p1Role);
       player2 = personFactory(domElements.p2Name.value, p2Role);
       confirmActive();
+      console.log(player1);
+      console.log(player2);
+      console.log(activePlayer);
     }
   });
 
@@ -110,6 +113,7 @@ var gameController = (function () {
         }
         gameBoard.setArrayIndex(squares.dataset.square, activePlayer.role);
         checkForWinner(squares.dataset.square);
+        console.log(activePlayer);
         if (winner) {
           return;
         } else if (turn === 9) {
@@ -118,6 +122,7 @@ var gameController = (function () {
           xTurn = !xTurn;
           updateActivePlayer();
           announceActivePlayer(activePlayer.name);
+          console.log("test");
         }
         console.log(gameBoard.board);
       });
@@ -171,8 +176,6 @@ var gameController = (function () {
         gameBoard.board[i] = "";
         domElements.boardSq.forEach((sq) => {
           sq.innerHTML = null;
-          turn = 0;
-          xTurn = true;
         });
       }
       let roleSelectors = document.querySelectorAll(".role-selection");
@@ -188,6 +191,9 @@ var gameController = (function () {
         sq.className = "board-square";
       });
       validGame = false;
+      winner = false;
+      turn = 0;
+      xTurn = true;
     });
   })();
 
