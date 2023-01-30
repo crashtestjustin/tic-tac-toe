@@ -51,6 +51,7 @@ var gameController = (function () {
     const roleLabel = document.querySelectorAll(".player-choose-role");
     const nameInput = document.querySelectorAll("input[type=text]");
     const nameLabel = document.querySelectorAll(".name-label");
+    const disbledCover = document.querySelector(".cover");
     return {
       startGameB,
       p1Name,
@@ -65,6 +66,7 @@ var gameController = (function () {
       roleLabel,
       nameInput,
       nameLabel,
+      disbledCover,
     };
   })();
 
@@ -75,13 +77,11 @@ var gameController = (function () {
     if (!validGame) {
       return;
     } else {
+      domElements.disbledCover.setAttribute("hidden", "");
       determineRoles();
       player1 = personFactory(domElements.p1Name.value, p1Role);
       player2 = personFactory(domElements.p2Name.value, p2Role);
       confirmActive();
-      console.log(player1);
-      console.log(player2);
-      console.log(activePlayer);
     }
   });
 
@@ -190,6 +190,7 @@ var gameController = (function () {
       domElements.boardSq.forEach((sq) => {
         sq.className = "board-square";
       });
+      domElements.disbledCover.removeAttribute("hidden", "");
       validGame = false;
       winner = false;
       turn = 0;
