@@ -1,5 +1,3 @@
-fix footer
-
 disabling and enabling the gameboard before and after a game
 
 adding welcome messages - need to add to screen somehow
