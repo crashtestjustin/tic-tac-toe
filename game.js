@@ -73,7 +73,6 @@ var gameController = (function () {
   domElements.startGameB.addEventListener("click", (e) => {
     e.preventDefault();
     formValidation();
-    console.log(validGame);
     if (!validGame) {
       return;
     } else {
@@ -113,7 +112,6 @@ var gameController = (function () {
         }
         gameBoard.setArrayIndex(squares.dataset.square, activePlayer.role);
         checkForWinner(squares.dataset.square);
-        console.log(activePlayer);
         if (winner) {
           return;
         } else if (turn === 9) {
@@ -122,9 +120,7 @@ var gameController = (function () {
           xTurn = !xTurn;
           updateActivePlayer();
           announceActivePlayer(activePlayer.name);
-          console.log("test");
         }
-        console.log(gameBoard.board);
       });
     });
   })();
@@ -146,7 +142,6 @@ var gameController = (function () {
         return gameBoard.getMove(moveIndex) === gameBoard.getMove(arrayIndex);
       });
     });
-    console.log(matchedArrays);
     if (matchedArrays.length >= 1) {
       winner = true;
       winnerAnnouncement();
