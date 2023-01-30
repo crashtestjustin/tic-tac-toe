@@ -48,6 +48,8 @@ var gameController = (function () {
     const p2RoleY = document.getElementById("p2-role-o");
     const p1RoleX = document.getElementById("p1-role-x");
     const p1RoleY = document.getElementById("p1-role-o");
+    const roleLabel = document.querySelectorAll(".player-choose-role");
+    const nameInput = document.querySelectorAll("input[type=text]");
     return {
       startGameB,
       p1Name,
@@ -59,12 +61,15 @@ var gameController = (function () {
       p1RoleY,
       p2RoleX,
       p2RoleY,
+      roleLabel,
+      nameInput,
     };
   })();
 
   domElements.startGameB.addEventListener("click", (e) => {
     e.preventDefault();
     formValidation();
+    console.log(validGame);
     if (!validGame) {
       return;
     } else {
@@ -166,6 +171,12 @@ var gameController = (function () {
       for (i = 0; i < roleSelectors.length; i++) {
         roleSelectors[i].checked = false;
       }
+      domElements.alertMessage.classList = "alert-messages";
+      domElements.alertMessage.innerHTML = "";
+      domElements.roleLabel.forEach((label) => {
+        label.classList.remove("error-text-color");
+        validGame = false;
+      });
     });
   })();
 
@@ -180,17 +191,25 @@ var gameController = (function () {
   }
 
   function formValidation() {
-    const nameInput = document.querySelectorAll("input[type=text]");
-    //need to add form validation here
-    for (i = 0; i < nameInput.length; i++) {
-      if (nameInput[i].validity.valueMissing) {
-        nameInput[i].classList.add("invalid-name-input");
-        domElements.alertMessage.innerHTML = "";
-        domElements.alertMessage.classList = "alert-messages-error";
-      } else {
-        nameInput[i].classList.remove("invalid-name-input");
-        domElements.alertMessage.classList = "alert-messages";
-      }
+    var activeError = false;
+    if (
+      (!domElements.p1RoleX.checked &&
+        !domElements.p1RoleY.checked &&
+        !domElements.p2RoleX.checked &&
+        !domElements.p2RoleY.checked) ||
+      (!domElements.p1RoleX.checked && !domElements.p1RoleY.checked) ||
+      (!domElements.p2RoleX.checked && !domElements.p2RoleY.checked)
+    ) {
+      domElements.alertMessage.innerHTML = "";
+      domElements.alertMessage.classList = "alert-messages-error";
+      domElements.roleLabel.forEach((label) => {
+        label.classList.add("error-text-color");
+      });
+      activeError = true;
+    } else {
+      domElements.roleLabel.forEach((label) => {
+        label.classList.remove("error-text-color");
+      });
     }
     if (
       (domElements.p1RoleX.checked && domElements.p2RoleX.checked) ||
@@ -198,8 +217,29 @@ var gameController = (function () {
     ) {
       domElements.alertMessage.innerHTML = "";
       domElements.alertMessage.classList = "alert-messages-radio";
+      domElements.roleLabel.forEach((label) => {
+        label.classList.add("error-text-color");
+      });
+      activeError = true;
     }
-    validGame = true;
+
+    for (i = 0; i < domElements.nameInput.length; i++) {
+      if (domElements.nameInput[i].validity.valueMissing) {
+        domElements.nameInput[i].classList.add("invalid-name-input");
+        domElements.alertMessage.innerHTML = "";
+        domElements.alertMessage.classList = "alert-messages-error";
+        activeError = true;
+      } else {
+        domElements.nameInput[i].classList.remove("invalid-name-input");
+      }
+    }
+
+    if (!activeError) {
+      domElements.alertMessage.classList = "alert-messages";
+      validGame = true;
+    } else {
+      validGame = false;
+    }
   }
   //
 })();
