@@ -61,10 +61,10 @@ form {
   gap: var(--form-gap);
 }
 
-.player-1 input,
-.player-2 input {
+.p1-name,
+.p2-name {
   border-radius: 4px;
-  border: 0;
+  border: 2px solid #ffffff;
   font-size: 1rem;
 }
 
@@ -76,6 +76,28 @@ form {
 .alert-messages {
   justify-self: center;
   grid-row: 3 / 4;
+}
+
+.alert-messages-error::after {
+  color: red;
+  display: flex;
+  justify-content: center;
+  content: "Please complete the required fields.";
+}
+
+.alert-messages-radio::after {
+  color: red;
+  display: flex;
+  justify-content: center;
+  content: "Player 1 and Player 2 cannot be the same role.";
+}
+
+.error-text-color {
+  color: red;
+}
+
+.invalid-name-input {
+  border: 2px solid red;
 }
 
 .alert-messages::after {
