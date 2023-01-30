@@ -29,7 +29,7 @@ header {
 .game-data {
   align-self: center;
   display: grid;
-  grid-template-rows: 4fr 2fr 2fr;
+  grid-template-rows: 2fr 2fr 1fr;
   row-gap: 20px;
   font-weight: var(--controls-font-weight);
 }
@@ -76,15 +76,15 @@ form {
 }
 
 .alert-messages {
-  margin-top: 20px;
+  margin-top: 5px;
   justify-self: center;
   grid-row: 3 / 4;
   font-size: 1.3rem;
 }
 
 .alert-messages-error::after {
+  margin-top: 5px;
   font-size: 1.3rem;
-  margin-top: 20px;
   color: red;
   display: flex;
   justify-content: center;
@@ -99,8 +99,8 @@ form {
 }
 
 .alert-messages-radio::after {
+  margin-top: 5px;
   font-size: 1.3rem;
-  margin-top: 20px;
   color: red;
   display: flex;
   justify-content: center;
@@ -146,8 +146,8 @@ form {
   background-color: var(--mainbg-color);
   padding: var(--core-padding);
   box-shadow: inset 0 0 20px 10px #cacaca;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
 }
 
 .form-and-board {
