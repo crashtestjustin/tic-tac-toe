@@ -85,6 +85,13 @@ form {
   content: "Please complete the required fields.";
 }
 
+.player-missing {
+  color: red;
+  display: flex;
+  justify-content: center;
+  content: "Both player names are required.";
+}
+
 .alert-messages-radio::after {
   color: red;
   display: flex;
