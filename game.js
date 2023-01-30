@@ -50,6 +50,7 @@ var gameController = (function () {
     const p1RoleY = document.getElementById("p1-role-o");
     const roleLabel = document.querySelectorAll(".player-choose-role");
     const nameInput = document.querySelectorAll("input[type=text]");
+    const nameLabel = document.querySelectorAll(".name-label");
     return {
       startGameB,
       p1Name,
@@ -63,6 +64,7 @@ var gameController = (function () {
       p2RoleY,
       roleLabel,
       nameInput,
+      nameLabel,
     };
   })();
 
@@ -226,11 +228,13 @@ var gameController = (function () {
     for (i = 0; i < domElements.nameInput.length; i++) {
       if (domElements.nameInput[i].validity.valueMissing) {
         domElements.nameInput[i].classList.add("invalid-name-input");
+        domElements.nameLabel[i].classList.add("error-text-color");
         domElements.alertMessage.innerHTML = "";
         domElements.alertMessage.classList = "alert-messages-error";
         activeError = true;
       } else {
         domElements.nameInput[i].classList.remove("invalid-name-input");
+        domElements.nameLabel[i].classList.remove("error-text-color");
       }
     }
 
