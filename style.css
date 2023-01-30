@@ -3,6 +3,7 @@
   --mainbg-color: #f2f2f2;
   --header-and-footer-color: #ffffff;
   --border: 3px solid #444444c5;
+  --disabled-color: #787878;
   --form-gap: 10px;
   --controls-font-weight: 550;
 }
@@ -11,7 +12,7 @@ body {
   margin: 0;
   height: 100vh;
   display: grid;
-  grid-template-rows: minmax(10%, auto) 1fr minmax(10%, auto);
+  grid-template-rows: auto 1fr auto;
   font-family: "Sora", sans-serif;
 }
 
@@ -138,23 +139,29 @@ form {
   background-color: var(--mainbg-color);
   padding: var(--core-padding);
   display: grid;
-  grid-template-rows: 1fr 10fr;
+  grid-template-rows: 1fr 4fr;
   box-shadow: inset 0 0 20px 10px #cacaca;
 }
 
 .board {
-  padding: 100px;
+  padding: 50px;
   display: grid;
-  grid-template: repeat(3, 150px) / repeat(3, 150px);
+  grid-template: repeat(3, 30%) / repeat(3, 25%);
   justify-content: center;
+  align-content: center;
 }
 
 .board-square {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 5rem;
+  font-size: 6rem;
   font-weight: 600;
+}
+
+.winning-move {
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .board-square:nth-child(-n + 3) {
@@ -174,7 +181,7 @@ form {
 }
 
 .disabled-label {
-  color: #787878;
+  color: var(--disabled-color);
 }
 
 footer {
