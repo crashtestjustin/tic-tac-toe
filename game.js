@@ -35,6 +35,7 @@ var gameController = (function () {
   var xTurn = true;
   var winner = false;
   var turn = 0;
+  var validGame = false;
 
   const domElements = (() => {
     const startGameB = document.querySelector(".start");
@@ -42,15 +43,36 @@ var gameController = (function () {
     const p2Name = document.getElementById("p2-name");
     const boardSq = document.querySelectorAll(".board-square");
     const PlayerRole = document.querySelectorAll(".role-selection");
-    return { startGameB, p1Name, p2Name, boardSq, PlayerRole };
+    const alertMessage = document.querySelector(".alert-messages");
+    const p2RoleX = document.getElementById("p2-role-x");
+    const p2RoleY = document.getElementById("p2-role-o");
+    const p1RoleX = document.getElementById("p1-role-x");
+    const p1RoleY = document.getElementById("p1-role-o");
+    return {
+      startGameB,
+      p1Name,
+      p2Name,
+      boardSq,
+      PlayerRole,
+      alertMessage,
+      p1RoleX,
+      p1RoleY,
+      p2RoleX,
+      p2RoleY,
+    };
   })();
 
   domElements.startGameB.addEventListener("click", (e) => {
     e.preventDefault();
-    determineRoles();
-    player1 = personFactory(domElements.p1Name.value, p1Role);
-    player2 = personFactory(domElements.p2Name.value, p2Role);
-    confirmActive();
+    formValidation();
+    if (!validGame) {
+      return;
+    } else {
+      determineRoles();
+      player1 = personFactory(domElements.p1Name.value, p1Role);
+      player2 = personFactory(domElements.p2Name.value, p2Role);
+      confirmActive();
+    }
   });
 
   const determineRoles = () => {
@@ -155,6 +177,29 @@ var gameController = (function () {
       announceActivePlayer(player2.name);
       activePlayer = personFactory(player2.name, "X");
     }
+  }
+
+  function formValidation() {
+    const nameInput = document.querySelectorAll("input[type=text]");
+    //need to add form validation here
+    for (i = 0; i < nameInput.length; i++) {
+      if (nameInput[i].validity.valueMissing) {
+        nameInput[i].classList.add("invalid-name-input");
+        domElements.alertMessage.innerHTML = "";
+        domElements.alertMessage.classList = "alert-messages-error";
+      } else {
+        nameInput[i].classList.remove("invalid-name-input");
+        domElements.alertMessage.classList = "alert-messages";
+      }
+    }
+    if (
+      (domElements.p1RoleX.checked && domElements.p2RoleX.checked) ||
+      (domElements.p1RoleY.checked && domElements.p2RoleY.checked)
+    ) {
+      domElements.alertMessage.innerHTML = "";
+      domElements.alertMessage.classList = "alert-messages-radio";
+    }
+    validGame = true;
   }
   //
 })();
