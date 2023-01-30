@@ -171,6 +171,7 @@ form {
   align-items: center;
   font-size: 6rem;
   font-weight: 600;
+  transition: ease-in-out;
 }
 
 .cover {
@@ -182,8 +183,28 @@ form {
 }
 
 .winning-move {
-  background-color: #777676c5;
-  color: #e4e4e4;
+  background-color: #777676ae;
+  color: #f3f3f3;
+  -webkit-animation: fadein 2s;
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .board-square:nth-child(-n + 3) {
