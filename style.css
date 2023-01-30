@@ -1,5 +1,5 @@
 :root {
-  --core-padding: 40px max(4%);
+  --core-padding: 50px max(4%);
   --mainbg-color: #f2f2f2;
   --header-and-footer-color: #ffffff;
   --border: 3px solid #444444c5;
@@ -40,6 +40,7 @@ form {
   row-gap: 20px;
   justify-items: center;
   align-items: center;
+  margin: 0 auto;
 }
 
 .player-info,
@@ -75,11 +76,15 @@ form {
 }
 
 .alert-messages {
+  margin-top: 20px;
   justify-self: center;
   grid-row: 3 / 4;
+  font-size: 1.3rem;
 }
 
 .alert-messages-error::after {
+  font-size: 1.3rem;
+  margin-top: 20px;
   color: red;
   display: flex;
   justify-content: center;
@@ -94,6 +99,8 @@ form {
 }
 
 .alert-messages-radio::after {
+  font-size: 1.3rem;
+  margin-top: 20px;
   color: red;
   display: flex;
   justify-content: center;
@@ -138,13 +145,19 @@ form {
 .body-content {
   background-color: var(--mainbg-color);
   padding: var(--core-padding);
+  box-shadow: inset 0 0 20px 10px #cacaca;
+  display: flex;
+  justify-content: center;
+}
+
+.form-and-board {
   display: grid;
   grid-template-rows: 1fr 4fr;
-  box-shadow: inset 0 0 20px 10px #cacaca;
+  max-width: 1100px;
 }
 
 .board {
-  padding: 50px;
+  padding: 25px;
   display: grid;
   grid-template: repeat(3, 30%) / repeat(3, 25%);
   justify-content: center;
